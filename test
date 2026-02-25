@@ -1,0 +1,459 @@
+import { request } from './httpRequest';
+import { IuserDetail } from '../redux/datamodel/authDataModal';
+import { IuserPorfileDto } from '../AppModel/UserProfileModel';
+import { IProductList, IProductPayload } from '../AppModel/ProductListModal';
+import { IOrderList } from '../AppModel/OrderListModal';
+import { IDsrProfileDto } from '../AppModel/DsrProfileModal';
+
+const userAuthenticate = (payload: any): Promise<IuserDetail> => {
+  return request(
+    'UserLogin/authenticate',
+    payload,
+    'POST',
+    null,
+  ) as Promise<IuserDetail>;
+};
+const VerifyOTP = (payload: any): Promise<any> => {
+  return request(`UserLogin/VerifyOtp`, payload, 'POST', null) as Promise<any>;
+};
+const GetAppVersionData = (payload: any): Promise<any> => {
+  return request(
+    'UserManage/getAppVersion',
+    payload,
+    'Post',
+    null,
+  ) as Promise<any>;
+};
+const GetMenuList = (roleId: any): Promise<any> => {
+  return request(
+    `UserManage/appUserMenu/${roleId}`,
+    null,
+    'Get',
+    null,
+  ) as Promise<any>;
+};
+const ChangePasswordApi = (payload: any): Promise<any> => {
+  return request(
+    `UserLogin/changePassword`,
+    payload,
+    'POST',
+    null,
+  ) as Promise<any>;
+};
+const ForgotPassword = (payload: any): Promise<any> => {
+  return request(
+    `UserLogin/forgotPassword`,
+    payload,
+    'POST',
+    null,
+  ) as Promise<any>;
+};
+const GetUserProfileService = (userId: Number): Promise<IuserPorfileDto> => {
+  return request(
+    `RetailerProfileManagement/getRetailerById/${userId}`,
+    null,
+    'Get',
+    null,
+  ) as Promise<IuserPorfileDto>;
+};
+const GetDsrProfileService = (DSRId: Number): Promise<IDsrProfileDto> => {
+  return request(
+    `DSRProfileManagement/GetDSRById/${DSRId}`,
+    null,
+    'Get',
+    null,
+  ) as Promise<IDsrProfileDto>;
+};
+const GetProductCategoryList = (distributorId: Number): Promise<any> => {
+  return request(
+    `ShoppingCart/GetCategoryFirstLevel/${distributorId}`,
+    null,
+    'Get',
+    null,
+  ) as Promise<any>;
+};
+const GetProductList = (payload: any): Promise<Array<IProductList>> => {
+  return request(
+    `ShoppingCart/getAllItemsOfDistributor`,
+    payload,
+    'POST',
+    null,
+  ) as Promise<Array<IProductList>>;
+};
+const CreateCart = (
+  distributorId: Number,
+  retailerId: Number | undefined,
+): Promise<any> => {
+  return request(
+    `ShoppingCart/createCart/${distributorId}/${retailerId}`,
+    null,
+    'Get',
+    null,
+  ) as Promise<any>;
+};
+const GetPaymentMethodList = (): Promise<any> => {
+  return request(
+    `ShoppingCart/GetPaymentList`,
+    null,
+    'Get',
+    null,
+  ) as Promise<any>;
+};
+const GetCartDetails = (
+  distributorId: Number,
+  retailerId: Number | undefined,
+): Promise<any> => {
+  return request(
+    `ShoppingCart/getCart/${distributorId}/${retailerId} `,
+    null,
+    'Get',
+    null,
+  ) as Promise<any>;
+};
+const AddToCart = (payload: any): Promise<any> => {
+  return request(
+    `ShoppingCart/modifyCart`,
+    payload,
+    'POST',
+    null,
+  ) as Promise<any>;
+};
+const GetCartItemsDescription = (cartId: any): Promise<any> => {
+  return request(
+    `ShoppingCart/getCardItemDescription/${cartId}`,
+    null,
+    'Get',
+    null,
+  ) as Promise<any>;
+};
+const DeleteFromCart = (
+  cartId: any,
+  distributorCode: any,
+  materialCode: any,
+): Promise<any> => {
+  return request(
+    `ShoppingCart/deletefromCart/${cartId}/${distributorCode}/${materialCode}`,
+    null,
+    'POST',
+    null,
+  ) as Promise<any>;
+};
+const PlaceYourOrder = (
+  payload: any,
+  distributorId: Number,
+  retailerId: Number,
+): Promise<any> => {
+  return request(
+    `RetailerOrder/PlaceOrder/${distributorId}/${retailerId}`,
+    payload,
+    'POST',
+    null,
+  ) as Promise<any>;
+};
+const GetAllOrders = (payload: any): Promise<Array<IOrderList>> => {
+  return request(
+    `RetailerOrder/getAllOrders`,
+    payload,
+    'POST',
+    null,
+  ) as Promise<Array<IOrderList>>;
+};
+const GetOrderDescription = (orderId: any): Promise<Array<IOrderList>> => {
+  return request(
+    `RetailerOrder/GetOrderDescriptionForApp/${orderId}`,
+    null,
+    'Get',
+    null,
+  ) as Promise<Array<IOrderList>>;
+};
+const CancelOrder = (payload: any): Promise<Array<IOrderList>> => {
+  return request(`RetailerOrder/cancelOrder`, payload, 'POST', null) as Promise<
+    Array<IOrderList>
+  >;
+};
+const GetCancelOrderReasonList = (): Promise<any> => {
+  return request(
+    `RetailerOrder/GetCancelReason`,
+    null,
+    'Get',
+    null,
+  ) as Promise<any>;
+};
+const GetCatalogueCategoryList = (): Promise<any> => {
+  return request(
+    `ShoppingCart/GetAllCategory`,
+    null,
+    'Get',
+    null,
+  ) as Promise<any>;
+};
+const GetCatalogueList = (payload: any): Promise<any> => {
+  return request(
+    `Product/GetCatalogueForRetailer`,
+    payload,
+    'POST',
+    null,
+  ) as Promise<any>;
+};
+const SendOTP = (payload: any): Promise<any> => {
+  return request(`UserLogin/SendOtp`, payload, 'POST', null) as Promise<any>;
+};
+const SaveDeviceDetails = (payload: any): Promise<any> => {
+  return request(
+    `UserLogin/SaveDeviceDetails`,
+    payload,
+    'POST',
+    null,
+  ) as Promise<any>;
+};
+const DeleteDeviceDetails = (payload: any): Promise<any> => {
+  return request(
+    `UserLogin/DeleteDeviceDetails`,
+    payload,
+    'POST',
+    null,
+  ) as Promise<any>;
+};
+const GetRefreshToken = (payload: any): Promise<any> => {
+  return request(
+    `UserLogin/RefreshToken`,
+    payload,
+    'POST',
+    null,
+  ) as Promise<any>;
+};
+const GetFeedbackList = (payload: any): Promise<any> => {
+  return request(
+    `ComplainManagement/getAllComplainsByStatus`,
+    payload,
+    'POST',
+    null,
+  ) as Promise<any>;
+};
+const CreateNewFeedback = (payload: any): Promise<any> => {
+  return request(
+    `ComplainManagement/createComplain`,
+    payload,
+    'POST',
+    'multipart/form-data',
+  ) as Promise<any>;
+};
+const GetFeedbackDescription = (feedbackId: any): Promise<any> => {
+  return request(
+    `ComplainManagement/getComplainById/${feedbackId}`,
+    null,
+    'Get',
+    null,
+  ) as Promise<any>;
+};
+const GetComplainTypeList = (): Promise<any> => {
+  return request(
+    `ComplainManagement/getAllComplainType`,
+    null,
+    'Get',
+    null,
+  ) as Promise<any>;
+};
+const GetLedgerFilterValues = (): Promise<any> => {
+  return request(
+    `RetailerLedger/getRetailerLedgerDurationFilter`,
+    null,
+    'Get',
+    null,
+  ) as Promise<any>;
+};
+const GetLedgerData = (payload: any): Promise<any> => {
+  return request(
+    `RetailerLedger/getLedger`,
+    payload,
+    'Post',
+    null,
+  ) as Promise<any>;
+};
+
+//Beat Plan Management
+// const GetAllBeatsAssignedToDsr = (DSRId: any, date: any): Promise<any> => {
+//    return request(`BeatManagement/getDSRVisitDetails/${DSRId}/${date}`, null, 'Get', null) as Promise<any>;
+// }
+const GetAssignedBeatsForDSRByDate = (DSRId: any, date: any): Promise<any> => {
+  return request(
+    `BeatManagement/getAssignedBeatsForDSRByDate/${DSRId}/${date}`,
+    null,
+    'Get',
+    null,
+  ) as Promise<any>;
+};
+const MarkAttendenceAgainstVisit = (payload: any): Promise<any> => {
+  return request(
+    `BeatManagement/dSRMarkAttendance`,
+    payload,
+    'POST',
+    null,
+  ) as Promise<any>;
+};
+const ConfirmAttendenceAgainstVisit = (
+  payload: any,
+  visitId: any,
+): Promise<any> => {
+  return request(
+    `BeatManagement/dSRConfirmAttendance/${visitId}`,
+    payload,
+    'PUT',
+    null,
+  ) as Promise<any>;
+};
+const AddRetailerRequest = (payload: any): Promise<any> => {
+  return request(
+    `BeatManagement/addRetailerByDSR`,
+    payload,
+    'POST',
+    null,
+  ) as Promise<any>;
+};
+
+const EditRetailerBankDetails = (payload: any): Promise<any> => {
+  return request(
+    `RetailerProfileManagement/editRetailerBankDetails`,
+    payload,
+    'POST',
+    'multipart/form-data',
+  ) as Promise<any>;
+};
+const GetRetailerBankDetails = (payload: any): Promise<any> => {
+  return request(
+    `RetailerProfileManagement/GetRetailerBankTaxDetails`,
+    payload,
+    'POST',
+    null,
+  ) as Promise<any>;
+};
+
+//=========== Scheme management ================//
+
+const GetDashboard = (retailerid: any): Promise<any> => {
+  return request(
+    `RetailerReward/dashboard/${retailerid}`,
+    retailerid,
+    'GET',
+    null,
+  ) as Promise<any>;
+};
+
+const ScanQr = (payload: any): Promise<any> => {
+  return request(`RetailerReward/scan`, payload, 'POST', null) as Promise<any>;
+};
+
+const GetScansummary = (payload: any): Promise<any> => {
+  return request(
+    `RetailerReward/getScans/${payload}`,
+    payload,
+    'GET',
+    null,
+  ) as Promise<any>;
+};
+
+const GetReedemsummary = (payload: any): Promise<any> => {
+  return request(
+    `RetailerReward/getRedeems/${payload}`,
+    payload,
+    'GET',
+    null,
+  ) as Promise<any>;
+};
+
+const GetBankingstatus = (payload: any): Promise<any> => {
+  return request(
+    `RetailerReward/getMyBankingDetails/${payload}`,
+    payload,
+    'GET',
+    null,
+  ) as Promise<any>;
+};
+
+const SendKycOtp = (payload: any): Promise<any> => {
+  return request(
+    `RetailerReward/aadhar/send-otp`,
+    payload,
+    'POST',
+    null,
+  ) as Promise<any>;
+};
+
+const VerifyKycOtp = (payload: any): Promise<any> => {
+  return request(
+    `RetailerReward/aadhar/verify-otp`,
+    payload,
+    'POST',
+    null,
+  ) as Promise<any>;
+};
+
+const Sendbankingforverification = (payload: any): Promise<any> => {
+  return request(
+    `RetailerReward/bankingVerification/${payload}`,
+    payload,
+    'POST',
+    null,
+  ) as Promise<any>;
+};
+
+const ReedemPoints = (payload: any): Promise<any> => {
+  return request(
+    `RetailerReward/redeem`,
+    payload,
+    'POST',
+    null,
+  ) as Promise<any>;
+};
+
+export {
+  userAuthenticate,
+  GetUserProfileService,
+  GetProductCategoryList,
+  GetProductList,
+  CreateCart,
+  GetPaymentMethodList,
+  GetCartDetails,
+  AddToCart,
+  GetCartItemsDescription,
+  DeleteFromCart,
+  PlaceYourOrder,
+  GetAllOrders,
+  GetOrderDescription,
+  CancelOrder,
+  GetCancelOrderReasonList,
+  GetCatalogueCategoryList,
+  GetCatalogueList,
+  SendOTP,
+  VerifyOTP,
+  SaveDeviceDetails,
+  DeleteDeviceDetails,
+  GetRefreshToken,
+  GetDsrProfileService,
+  ChangePasswordApi,
+  ForgotPassword,
+  GetFeedbackList,
+  CreateNewFeedback,
+  GetFeedbackDescription,
+  GetComplainTypeList,
+  GetMenuList,
+  GetAppVersionData,
+  GetLedgerFilterValues,
+  GetLedgerData,
+  // GetAllBeatsAssignedToDsr,
+  GetAssignedBeatsForDSRByDate,
+  MarkAttendenceAgainstVisit,
+  ConfirmAttendenceAgainstVisit,
+  AddRetailerRequest,
+  EditRetailerBankDetails,
+  GetRetailerBankDetails,
+  GetDashboard,
+  GetScansummary,
+  GetReedemsummary,
+  GetBankingstatus,
+  SendKycOtp,
+  VerifyKycOtp,
+  Sendbankingforverification,
+  ReedemPoints,
+  ScanQr,
+};
